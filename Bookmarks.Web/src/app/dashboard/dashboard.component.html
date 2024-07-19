@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row mt-3" *ngIf="inProgress">
+        <div class="card mb-3" *ngFor="let number of [0,1,2,3,4]">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#868e96"></rect>
+                    </svg>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title placeholder-glow">
+                            <span class="placeholder col-6"></span>
+                        </h5>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-7"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-6"></span>
+                            <span class="placeholder col-8"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3" *ngIf="!inProgress">
+        <nav>
+            <div class="pagination justify-content-center mb-3">
+                <div class="btn-group">
+                    <button type="button" (click)="onPageChange(pageNumber - 1)" class="btn btn-secondary"
+                        [disabled]="pageNumber == 1">Previous</button>
+                    <button type="button" disabled class="btn btn-outline-secondary text-faded">Page
+                        {{pageNumber}} of {{
+                        numberOfPages() }}</button>
+                    <button type="button" (click)="onPageChange(pageNumber + 1)" class="btn btn-secondary"
+                        [disabled]="pageNumber >= totalRecords/pageSize">Next</button>
+                </div>
+            </div>
+        </nav>
+        <div class="card mb-3" *ngFor="let preview of links">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img [src]="preview.imageUrl" (error)="onImageError($event, preview.title)"
+                        class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ preview.title }}</h5>
+                        <p class="card-text">{{ preview.description }}</p>
+                        <a target="_blank" href="{{ preview.url }}"
+                            class="icon-link gap-1 icon-link-hover stretched-link">
+                            Continue reading
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="row mt-3">
+    <form [formGroup]="addUrlForm!" (ngSubmit)="onSubmit()" novalidate>
+        <div class="col-md-8 offset-md-2">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default"><i class="bi bi-globe"></i></span>
+                <input type="url" #url formControlName="url" class="form-control" (blur)="fetchPreview()"
+                    [ngClass]="{ 'is-invalid': submitted && f['url'].errors }" placeholder="Provider URL to bookmark">
+                <button class="btn btn-outline-secondary" [disabled]="inProgress" type="submit"><i
+                        class="bi bi-plus-lg me-1"></i>Add
+                    URL</button>
+                <div *ngIf="submitted && f['url'].errors" class="invalid-feedback">
+                    <div *ngIf="f['url'].errors!['required']">URL is required</div>
+                    <div *ngIf="f['url'].errors!['pattern']">URL must be a valid URL</div>
+                </div>
+            </div>
+
+            <div class="card mb-3" *ngIf="preview">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img [src]="preview.imageUrl" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ preview.title }}</h5>
+                            <p class="card-text">{{ preview.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3" *ngIf="inProgress">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="180"
+                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder"
+                            preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#868e96"></rect>
+                        </svg>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title placeholder-glow">
+                                <span class="placeholder col-6"></span>
+                            </h5>
+                            <p class="card-text placeholder-glow">
+                                <span class="placeholder col-7"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-6"></span>
+                                <span class="placeholder col-8"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
