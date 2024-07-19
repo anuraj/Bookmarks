@@ -8,12 +8,16 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
-builder.Services.AddDbContext<BookmarksDbContext>(options => options.UseMongoDB("mongodb://localhost:27017", "bookmarks"));
+var connectionString = builder.Configuration.GetConnectionString("BookmarksDb");
+
+builder.Services.AddDbContext<BookmarksDbContext>(options => options.UseMongoDB(connectionString!, "bookmarks"));
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
@@ -23,6 +27,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 if (app.Environment.IsDevelopment())
 {

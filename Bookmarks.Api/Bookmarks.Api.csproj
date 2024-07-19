@@ -12,4 +12,8 @@
 		<PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.0.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Bookmarks.ServiceDefaults\Bookmarks.ServiceDefaults.csproj" />
+	</ItemGroup>
 </Project>
