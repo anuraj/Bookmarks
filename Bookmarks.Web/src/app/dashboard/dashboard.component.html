@@ -27,20 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-3" *ngIf="!inProgress">
-        <nav>
-            <div class="pagination justify-content-center mb-3">
-                <div class="btn-group">
-                    <button type="button" (click)="onPageChange(pageNumber - 1)" class="btn btn-secondary"
-                        [disabled]="pageNumber == 1">Previous</button>
-                    <button type="button" disabled class="btn btn-outline-secondary text-faded">Page
-                        {{pageNumber}} of {{
-                        numberOfPages() }}</button>
-                    <button type="button" (click)="onPageChange(pageNumber + 1)" class="btn btn-secondary"
-                        [disabled]="pageNumber >= totalRecords/pageSize">Next</button>
-                </div>
-            </div>
-        </nav>
+    <div class="row mt-3" *ngIf="!inProgress && links.length >= 1">
         <div class="card mb-3" *ngFor="let preview of links">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -60,5 +47,19 @@
                 </div>
             </div>
         </div>
+
+        <nav>
+            <div class="pagination justify-content-center mb-3">
+                <div class="btn-group">
+                    <button type="button" (click)="onPageChange(pageNumber - 1)" class="btn btn-secondary"
+                        [disabled]="pageNumber == 1">Previous</button>
+                    <button type="button" disabled class="btn btn-outline-secondary text-faded">Page
+                        {{pageNumber}} of {{
+                        numberOfPages() }}</button>
+                    <button type="button" (click)="onPageChange(pageNumber + 1)" class="btn btn-secondary"
+                        [disabled]="pageNumber >= totalRecords/pageSize">Next</button>
+                </div>
+            </div>
+        </nav>
     </div>
 </div>
